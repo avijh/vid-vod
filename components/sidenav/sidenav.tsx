@@ -1,8 +1,8 @@
 import { SignedIn, SignedOut, SignOutButton, UserButton } from '@clerk/nextjs';
-import { currentUser } from '@clerk/nextjs/server';
+//import { currentUser } from '@clerk/nextjs/server';
 import Link from 'next/link';
 import NavLink from '../nav-link/nav-link';
-import { AiFillHome, AiOutlineUpload, AiFillCompass, AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
+import { AiFillHome, AiOutlineUpload, AiFillCompass, AiOutlineLogin } from 'react-icons/ai';
 import Image from 'next/image';
 import logoIcon from '@/assets/vidvod-logo.png';
 
@@ -29,6 +29,7 @@ export default function Sidenav() {
                             },
                          }}
                     />
+                    <SignOutButton />
                 </div></li>
             </SignedIn>
         </ul>

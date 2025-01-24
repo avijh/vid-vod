@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Sidenav from '@/components/sidenav/sidenav';
 import VideoToolbar from '@/components/video-toolbar/video-toolbar'; 
 import VideoBox from "@/components/video-box/video-box";
