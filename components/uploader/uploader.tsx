@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useState, type FormEvent } from 'react'
-import toast from 'react-hot-toast'
-import { upload } from '@vercel/blob/client'
-import ProgressBar from './progress-bar'
+import { useState, type FormEvent } from 'react';
+import toast from 'react-hot-toast';
+import { upload } from '@vercel/blob/client';
+import ProgressBar from '@/components/uploader/progress-bar';
 
 export default function Uploader() {
   const [preview, setPreview] = useState<string | null>(null)
@@ -33,7 +33,28 @@ export default function Uploader() {
           onUploadProgress: (progressEvent) => {
             setProgress(progressEvent.percentage)
           },
-        })
+        });
+        
+        console.log('Blob',  blob);
+
+        try {
+          const response = await fetch('/api/video', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            videoUrl: blob.url,
+          }),
+        });
+
+        const result = await response.json();
+        console.log('Result:', result);
+        } 
+        catch (error) {
+          console.error('Error:', error);
+        }
+        
 
         // toast(
         //   (t: { id: string }) => (
@@ -92,7 +113,7 @@ export default function Uploader() {
           <h2 className="text-xl font-semibold">Upload a video</h2>
         </div>
         <label
-          htmlFor="image-upload"
+          htmlFor="video-upload"
           className="group relative mt-2 flex h-72 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 bg-white shadow-sm transition-all hover:bg-gray-50"
         >
           <div
@@ -161,7 +182,7 @@ export default function Uploader() {
               <path d="m16 16-4-4-4 4" />
             </svg>
             <p className="mt-2 text-center text-sm text-gray-500">
-              Drag and drop or click to upload.
+              Drop a video file or click to upload.
             </p>
           </div>
           {preview && (
@@ -175,7 +196,7 @@ export default function Uploader() {
         </label>
         <div className="mt-1 flex rounded-md shadow-sm">
           <input
-            id="image-upload"
+            id="video-upload"
             name="image"
             type="file"
             accept="image/*, video/*"

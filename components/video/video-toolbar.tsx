@@ -1,4 +1,4 @@
-import VideoAction from "../video-action/video-action";
+import VideoAction from "@/components/video/video-action";
 
 export default function VideoToolbar() {
     return (
